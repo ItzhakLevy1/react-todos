@@ -16,14 +16,18 @@ function App() {
   ]);
 
   const addTodo = (description, assigned) => {
+    let rowNumber = 0;
     if (todos.length > 0) {
-      const newTodo = {
-        rowNumber: todos.length + 1,
-        rowDescription: description,
-        rowAssigned: assigned,
-      };
-      setTodos((todos) => [...todos, newTodo]); // Use setTodos ( which is a state updater function ) to change todos by adding a newTodo to the existing todos
+      rowNumber = todos[todos.length - 1].rowNumber + 1;  // get the last todo and add one to it
+    } else {
+      rowNumber = 1;
     }
+    const newTodo = {
+      rowNumber: todos.length + 1,
+      rowDescription: description,
+      rowAssigned: assigned,
+    };
+    setTodos((todos) => [...todos, newTodo]); // Use setTodos ( which is a state updater function ) to change todos by adding a newTodo to the existing todos
   };
 
   return (
