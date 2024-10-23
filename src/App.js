@@ -15,15 +15,14 @@ function App() {
     },
   ]);
 
-  const addTodo = () => {
+  const addTodo = (description, assigned) => {
     if (todos.length > 0) {
       const newTodo = {
         rowNumber: todos.length + 1,
-        rowDescription: "New Todo",
-        rowAssigned: "User Three",
+        rowDescription: description,
+        rowAssigned: assigned,
       };
       setTodos((todos) => [...todos, newTodo]); // Use setTodos ( which is a state updater function ) to change todos by adding a newTodo to the existing todos
-      console.log(todos);
     }
   };
 
@@ -36,7 +35,7 @@ function App() {
           <button className="btn btn-primary" onClick={addTodo}>
             Add new todo
           </button>
-          <NewTodoForm />
+          <NewTodoForm addTodo={addTodo} />
         </div>
       </div>
     </div>
