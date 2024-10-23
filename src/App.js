@@ -1,8 +1,9 @@
+import React, { useState } from "react";
 import "./App.css";
 import TodoTable from "./components/TodoTable";
 
 function App() {
-  const todos = [
+  const [todos, setTodos] = useState([
     { rowNumber: 1, rowDescription: "Feed puppy", rowAssigned: "User One" },
     { rowNumber: 2, rowDescription: "Water plants", rowAssigned: "User Two" },
     { rowNumber: 3, rowDescription: "Make dinner", rowAssigned: "User One" },
@@ -11,7 +12,7 @@ function App() {
       rowDescription: "Charge phone battery",
       rowAssigned: "User One",
     },
-  ];
+  ]);
 
   const addTodo = () => {
     if (todos.length > 0) {
@@ -20,7 +21,7 @@ function App() {
         rowDescription: "New Todo",
         rowAssigned: "User Three",
       };
-      todos.push(newTodo);
+      setTodos((todos) => [...todos, newTodo]); // Use setTodos ( which is a state updater function ) to change todos by adding a newTodo to the existing todos
       console.log(todos);
     }
   };
