@@ -18,7 +18,7 @@ function App() {
   const addTodo = (description, assigned) => {
     let rowNumber = 0;
     if (todos.length > 0) {
-      rowNumber = todos[todos.length - 1].rowNumber + 1;  // get the last todo and add one to it
+      rowNumber = todos[todos.length - 1].rowNumber + 1; // get the last todo and add one to it
     } else {
       rowNumber = 1;
     }
@@ -30,15 +30,22 @@ function App() {
     setTodos((todos) => [...todos, newTodo]); // Use setTodos ( which is a state updater function ) to change todos by adding a newTodo to the existing todos
   };
 
+  const deleteTodo = (deleteTodoRowNumber) => {
+    // An identifier so that react would know which row to delete
+    let filtered = todos.filter((value) => {
+      // A new filtered todos array is created by iterating the original todos array, each iteration is represented by "value" as the iterator
+      return value.rowNumber !== deleteTodoRowNumber; // Only the todo items whose rowNumber does not match the deleteTodoRowNumber will be included in the filtered array
+    });
+    setTodos(filtered); //  Calling the setTodos state updater function which updates the todos state with the new filtered array
+  };
+
   return (
     <div className="mt-5 container">
       <div className="card">
         <div className="card-header">Your Todo's</div>
         <div className="card-body">
-          <TodoTable todos={todos} />
-          <button className="btn btn-primary" onClick={addTodo}>
-            Add new todo
-          </button>
+          <TodoTable todos={todos} deleteTodo={deleteTodo} />
+          <button className="btn btn-primary">Add new todo</button>
           <NewTodoForm addTodo={addTodo} />
         </div>
       </div>
