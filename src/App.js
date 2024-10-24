@@ -4,6 +4,7 @@ import TodoTable from "./components/TodoTable";
 import NewTodoForm from "./components/NewTodoForm";
 
 function App() {
+  const [showAddTodoForm, setShowAddTodoForm] = useState(false);
   const [todos, setTodos] = useState([
     { rowNumber: 1, rowDescription: "Feed puppy", rowAssigned: "User One" },
     { rowNumber: 2, rowDescription: "Water plants", rowAssigned: "User Two" },
@@ -45,8 +46,13 @@ function App() {
         <div className="card-header">Your Todo's</div>
         <div className="card-body">
           <TodoTable todos={todos} deleteTodo={deleteTodo} />
-          <button className="btn btn-primary">Add new todo</button>
-          <NewTodoForm addTodo={addTodo} />
+          <button
+            onClick={() => setShowAddTodoForm(!showAddTodoForm)} // On click setShowAddTodoForm will be updated with the OPPOSITE of the curr ent state of showAddTodoForm (true / false)
+            className="btn btn-primary"
+          >
+            New Todo
+          </button>
+          {showAddTodoForm && <NewTodoForm addTodo={addTodo} />}
         </div>
       </div>
     </div>
